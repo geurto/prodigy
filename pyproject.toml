@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "prodigy"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision",
+    "torchaudio",
+    "numpy",
+    "matplotlib",
+    "music21>=8.1.0",
+    "miditok>=3.0.0",
+    "requests",
+    "joblib",
+    "jsonpickle",
+    "webcolors",
+    "chardet",
+    "more-itertools",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/prodigy"]
