@@ -22,7 +22,7 @@
       {
         devShell = pkgs.mkShell {
           buildInputs = with pkgs; [
-            python311
+            python312
             uv
             gcc13
             cudatoolkit
@@ -38,6 +38,10 @@
                 pkgs.cudaPackages.cudnn
               ]
             }:$LD_LIBRARY_PATH
+            if [ ! -d .venv ]; then
+              uv venv .venv --python python3.12
+            fi
+            source .venv/bin/activate
             echo "Transformer Sequencer dev shell"
             echo "Python: $(python --version)"
           '';
