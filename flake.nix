@@ -17,6 +17,7 @@
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
+          config.cudaSupport = true;
         };
       in
       {
@@ -25,7 +26,7 @@
             python312
             uv
             gcc13
-            cudatoolkit
+            cudaPackages.cudatoolkit
             cudaPackages.cudnn
             cudaPackages.cuda_cudart
           ];
@@ -34,8 +35,10 @@
             export LD_LIBRARY_PATH=${
               pkgs.lib.makeLibraryPath [
                 pkgs.gcc13.cc.lib
-                pkgs.cudatoolkit
+                pkgs.cudaPackages.cudatoolkit
                 pkgs.cudaPackages.cudnn
+                pkgs.cudaPackages.cuda_cudart
+                pkgs.linuxPackages.nvidia_x11
               ]
             }:$LD_LIBRARY_PATH
             if [ ! -d .venv ]; then
